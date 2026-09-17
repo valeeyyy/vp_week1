@@ -2,21 +2,24 @@ package com.valerie.wizardadventure
 
 import kotlin.math.max
 
-public class Enemy (val enemyType: String) {
-    val enemyName = "${enemyType}mon"
+public class Enemy (val type: EnemyType) {
+    val enemyName = "${type.name.lowercase().replaceFirstChar { it.uppercase() }}mon"
     val maxHP = (40..50).random()
-    val currHP = maxHP
+    var currHP = maxHP
 
     public fun isAlive():Boolean {
-        return currHP>0
+        return currHP > 0
     }
-
     public fun showStatus() {
         println(enemyName)
         println("HP: ${currHP}/${maxHP}")
-        println("Type: ${enemyType}")
-
+        println("Type: ${type.name.lowercase().replaceFirstChar { it.uppercase() }}")
     }
 
-    
+    public fun attack(): Int {
+        return 10
+    }
+    public fun takeDamage(dmg: Int) {
+        currHP -= dmg
+    }
 }
