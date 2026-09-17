@@ -96,6 +96,7 @@ public fun makeOrder() {
             if (orderItem.item == selected) {
                 orderItem.quantity += quantity
                 found = true
+                break
             }
         }
 
