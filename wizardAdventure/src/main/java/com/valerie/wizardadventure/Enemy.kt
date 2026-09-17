@@ -1,7 +1,5 @@
 package com.valerie.wizardadventure
 
-import kotlin.math.max
-
 public class Enemy (val type: EnemyType) {
     val enemyName = "${type.name.lowercase().replaceFirstChar { it.uppercase() }}mon"
     val maxHP = (40..50).random()

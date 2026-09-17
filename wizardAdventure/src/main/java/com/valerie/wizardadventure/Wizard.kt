@@ -16,12 +16,15 @@ public class Wizard(var name: String) {
         return currHP > 0
     }
     public fun showStats() {
-        println("————————  ${name}'s STATS ————————— ")
+        println("\n————————  ${name}'s STATS ————————— ")
         println("HP: ${currHP}/${maxHP}")
         println("Mana: ${currMana}/${maxMana}")
-        println("Kills needed to envolve: ${currKills}/${maxKills}")
+        println("Kills needed to evolve: ${currKills}/${maxKills}")
         println("Mana Potions held: ${manaPotion}")
         println("Health Potions held: ${healthPotion}")
+        if (isStrong) {
+            println("Lifesteal: $lifeSteal")
+        }
     }
 
     public fun showStatus() {

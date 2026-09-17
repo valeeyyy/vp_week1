@@ -6,7 +6,7 @@ public fun main() {
     val wizardName = if (name.isNullOrBlank()) "nameless wizard" else name
     val wizard = Wizard(wizardName)
 
-    println("\nGood luck, ${wizard.name}! You're gonna need it!\n")
+    println("\nGood luck, ${wizard.name}! You're gonna need it!")
 
     while(true) {
         mainMenu(wizard)
@@ -14,13 +14,13 @@ public fun main() {
 }
 
 public fun mainMenu(wizard: Wizard) {
-    println("What're you going to do?")
+    println("\nWhat're you going to do?")
     println("\t1. View Stats")
     println("\t2. Enter battle")
     print("Please select an option: ")
     when(readlnOrNull()?.toIntOrNull()) {
         1 -> viewStats(wizard)
-        2 -> enterBattle()
+        2 -> enterBattle(wizard)
         else -> println("Invalid option, please choose 1 or 2.\n")
     }
 }
@@ -35,7 +35,7 @@ public fun viewStats(wizard: Wizard) {
     when (readlnOrNull()?.lowercase()) {
         "a" -> {
             if (wizard.drinkManaPotion()) {
-                println("Your mana has been restored by 15 points.\n")
+                println("Your mana has been restored by 15 points.")
             } else {
                 println("You have no mana potions left.\n")
             }
@@ -43,14 +43,14 @@ public fun viewStats(wizard: Wizard) {
 
         "b" -> {
             if (wizard.drinkHealthPotion()) {
-                println("Your health has been restored by 25 points.\n")
+                println("Your health has been restored by 25 points.")
             } else {
                 println("You have no health potions left.\n")
             }
         }
 
         "c" -> {
-            print("Enter your new name: ")
+            print("\nEnter your new name: ")
             val newName = readlnOrNull()
             if (newName.isNullOrBlank()) {
                 println("Name cannot be empty.\n")
@@ -59,7 +59,7 @@ public fun viewStats(wizard: Wizard) {
                 print("Name updated successfully\n")
             }
         }
-        "d" -> return
+        "d" -> println("Cancelled.")
         else -> println("Invalid option!\n")
     }
 }
@@ -112,7 +112,7 @@ public fun enterBattle(wizard: Wizard) {
                 }
             }
             "e" -> {
-                println("You escaped!\n")
+                println("You escaped!")
                 return
             }
             else -> println("Invalid option.\n")
@@ -130,8 +130,9 @@ public fun enterBattle(wizard: Wizard) {
     }
 }
 public fun doAttack(wizard: Wizard, type: EnemyType, enemy: Enemy) {
-    if (wizard.currMana < 10) {
+    if (!wizard.hasEnoughMana()) {
         println("Not enough mana!\n")
+        return
     }
 
     val wizDmg = wizard.attack(type, enemy)
